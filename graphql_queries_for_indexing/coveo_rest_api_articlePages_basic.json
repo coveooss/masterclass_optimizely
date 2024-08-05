@@ -1,0 +1,29 @@
+{
+  "Services": [
+    {
+      "Url": "https://cg.optimizely.com/content",
+      "authentication": {
+        "username": "@username",
+        "password": "@password",
+        "forceBasicAuthentication": "true"
+      },
+      "Endpoints": [
+        {
+          "Path": "v2",
+          "Method": "GET",
+          "ItemPath": "data.ArticlePage.items",
+          "SkippableErrorCodes": "404",
+          "ItemType": "Articles",
+          "Uri": "https://optimizely-saas-cms.netlify.app/%[_metadata.url.default]",
+          "ClickableUri": "%[_metadata.url.base]%[_metadata.url.default]",
+          "Title": "%[articleTitle]",
+          "ModifiedDate": "%[_metadata.lastModified]",
+          "Body": "%[articleBody.html]",
+          "QueryParameters": {
+            "query": "query MyQuery {  }"
+          }
+        }
+      ]
+    }
+  ]
+}

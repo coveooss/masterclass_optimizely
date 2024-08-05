@@ -1,0 +1,40 @@
+{
+  "Services": [
+    {
+      "Url": "https://cg.optimizely.com/content",
+      "authentication": {
+        "username": "@username",
+        "password": "@password",
+        "forceBasicAuthentication": "true"
+      },
+      "Endpoints": [
+        {
+          "paging": {
+            "pageSize": 2,
+            "offsetType": "item",
+            "TotalCountKey": "data.ArticlePage.total"
+          },
+          "Path": "v2",
+          "Method": "GET",
+          "ItemPath": "data.ArticlePage.items",
+          "SkippableErrorCodes": "404",
+          "ItemType": "Articles",
+          "Uri": "https://optimizely-saas-cms.netlify.app/%[_metadata.url.default]",
+          "ClickableUri": "%[_metadata.url.base]%[_metadata.url.default]",
+          "Title": "%[articleTitle]",
+          "ModifiedDate": "%[_metadata.lastModified]",
+          "Body": "%[articleBody.html]",
+          "Metadata": {
+            "author": "%[articleAuthors[0]]",
+            "ec_images": "%[articleHeroImage.url.default]",
+            "originalUrl": "%[_metadata.url.base]%[_metadata.url.default]",
+            "my_locale": "%[_metadata.locale]"
+          },
+          "QueryParameters": {
+            "query": "query MyQuery {  ArticlePage(where: { _metadata: { status: { eq: \"Published\" } } } skip:@offset limit:@pageSize ) {    items {      articleBody {        html      }      articleTitle      _metadata {        url {          base          default        }        lastModified        status locale     }      articleHeroImage {        url {          default        }      }      articleAuthors    } total  }}"
+          }
+        }
+      ]
+    }
+  ]
+}

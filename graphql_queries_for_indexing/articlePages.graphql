@@ -1,0 +1,29 @@
+query MyQuery {
+  ArticlePage(
+    where: { _metadata: { status: { eq: "Published" } } }
+    limit: 2
+    skip: 2
+  ) {
+    items {
+      articleBody {
+        html
+      }
+      articleTitle
+      _metadata {
+        url {
+          base
+          default
+        }
+        lastModified
+        status
+      }
+      articleHeroImage {
+        url {
+          default
+        }
+      }
+      articleAuthors
+    }
+    total
+  }
+}
