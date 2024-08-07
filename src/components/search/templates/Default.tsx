@@ -1,14 +1,13 @@
-'use client';
+"use client";
 import {
   AtomicResultImage,
   AtomicResultLink,
   AtomicResultSectionChildren,
   AtomicResultText,
   FoldedResult,
-} from '@coveo/atomic-react';
-import { useCallback, useEffect, useRef } from 'react';
-import Badges from './Badges';
-import FieldList from './FieldList';
+} from "@coveo/atomic-react";
+import { useCallback, useEffect, useRef } from "react";
+import Badges from "./Badges";
 
 export const defaultStyleForTemplates = `
   :host {
@@ -138,8 +137,10 @@ export interface FoldedResultProps {
 
 export const handleResultCardClick = (evt: any) => {
   const target = evt.target as HTMLElement;
-  const container = target?.shadowRoot?.querySelector('.result-root');
-  const link = container?.querySelector('atomic-result-link a[href]') as HTMLElement;
+  const container = target?.shadowRoot?.querySelector(".result-root");
+  const link = container?.querySelector(
+    "atomic-result-link a[href]"
+  ) as HTMLElement;
   link?.click();
 };
 
@@ -150,23 +151,28 @@ export const preventClickPropagation = (evt: React.MouseEvent<HTMLElement>) => {
 export function useRootClickHandler(clickHandler: (_evt: any) => void) {
   const nodeRef = useRef<HTMLAtomicResultSectionChildrenElement | null>(null);
   const getHost = useCallback(() => {
-    const shadowRoot = nodeRef.current?.closest('.result-root')?.getRootNode() as ShadowRoot;
+    const shadowRoot = nodeRef.current
+      ?.closest(".result-root")
+      ?.getRootNode() as ShadowRoot;
     return shadowRoot?.host;
   }, [nodeRef]);
 
   useEffect(() => {
     if (nodeRef.current) {
-      getHost()?.addEventListener('click', clickHandler);
+      getHost()?.addEventListener("click", clickHandler);
     }
 
-    return () => getHost()?.removeEventListener('click', clickHandler);
+    return () => getHost()?.removeEventListener("click", clickHandler);
   }, [clickHandler, getHost]);
 
   return nodeRef;
 }
 
-export function stripUrlDomain(url: string, domainMatch = /https:\/\/help\.barca\.group/) {
-  return url.replace(domainMatch, '');
+export function stripUrlDomain(
+  url: string,
+  domainMatch = /https:\/\/help\.barca\.group/
+) {
+  return url.replace(domainMatch, "");
 }
 
 export default function DefaultTemplate({ foldedResult }: FoldedResultProps) {
@@ -185,23 +191,25 @@ export default function DefaultTemplate({ foldedResult }: FoldedResultProps) {
       <style>{templateStyle}</style>
       <Badges {...foldedResult} />
       <AtomicResultSectionChildren className="result-body" ref={nodeRef}>
-        {imageField && <AtomicResultImage field={imageField} className="result-image" />}
+        {imageField && (
+          <AtomicResultImage field={imageField} className="result-image" />
+        )}
         <div className="result-details">
           <div className="result-link">
             <AtomicResultLink hrefTemplate={stripUrlDomain(clickUri)}>
               <a
                 slot="attributes"
                 target={
-                  articleType === 'Barca Help Articles' || articleType === 'Barca Skipper Articles' ? '_self' : '_blank'
+                  articleType === "Barca Help Articles" ||
+                  articleType === "Barca Skipper Articles"
+                    ? "_self"
+                    : "_blank"
                 }
                 onClick={preventClickPropagation}
               ></a>
             </AtomicResultLink>
           </div>
           <AtomicResultText field="excerpt" />
-
-          <FieldList result={result} field="ec_category" label="Category" />
-          <FieldList result={result} field="articletags" label="Tags" />
         </div>
       </AtomicResultSectionChildren>
     </>

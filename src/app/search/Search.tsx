@@ -1,5 +1,4 @@
 "use client";
-import DefaultTemplate from "@/components/search/templates/Default";
 import SimpleTemplate from "@/components/search/templates/Simple";
 import { searchEngine } from "@/engine";
 

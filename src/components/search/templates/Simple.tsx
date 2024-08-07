@@ -8,7 +8,6 @@ import {
 } from "@coveo/atomic-react";
 import { useCallback, useEffect, useRef } from "react";
 import Badges from "./Badges";
-import FieldList from "./FieldList";
 
 export const defaultStyleForTemplates = `
   :host {
@@ -21,7 +20,10 @@ export const defaultStyleForTemplates = `
 
     cursor: pointer;
   }
-
+  atomic-result-section-badges {
+    --row-height: 100% !important;
+  }
+  
   atomic-result-link {
     display: block;
     margin-bottom: 1.25rem;
@@ -190,7 +192,7 @@ export default function SimpleTemplate({ foldedResult }: FoldedResultProps) {
   return (
     <>
       <style>{templateStyle}</style>
-      {/* <Badges {...foldedResult} /> */}
+      <Badges {...foldedResult} />
       <AtomicResultSectionChildren className="result-body" ref={nodeRef}>
         {imageField && (
           <AtomicResultImage field={imageField} className="result-image" />
