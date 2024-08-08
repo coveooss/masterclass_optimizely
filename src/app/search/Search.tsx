@@ -34,7 +34,13 @@ export default function Search() {
     <div className="search-results__container" suppressHydrationWarning={true}>
       <AtomicSearchInterface
         engine={searchEngine}
-        fieldsToInclude={["source", "objecttype", "ec_images", "author"]}
+        fieldsToInclude={[
+          "source",
+          "objecttype",
+          "ec_images",
+          "author",
+          "ytthumbnailurl",
+        ]}
         localization={(i18n) => {
           i18n.addResourceBundle("en", "translation", {
             search: "Search Optimizely",
