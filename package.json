@@ -9,7 +9,7 @@
     "dev": "yarn next dev --experimental-https -p 3002",
     "build": "yarn next build && yarn opti-graph webhook:create",
     "build:full": "yarn graphql-codegen && yarn next build && yarn opti-graph webhook:create",
-    "start:local": "next start -p 3002",
+    "start:local": "next start  -p 3002",
     "compile": "yarn graphql-codegen",
     "watch": "yarn graphql-codegen -w",
     "styles:push": "yarn opti-cms styles:push --components=src/components",
